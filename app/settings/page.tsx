@@ -26,10 +26,27 @@ import {
   LogOut,
   Camera,
   Edit2,
-  Save
+  Save,
+  LucideIcon
 } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/components/auth/AuthContext";
+
+interface SettingItem {
+  label: string;
+  icon: LucideIcon;
+  action: () => void;
+  hasAction?: boolean;
+  isToggle?: boolean;
+  danger?: boolean;
+  value?: string;
+}
+
+interface SettingsCategory {
+  title: string;
+  icon: LucideIcon;
+  settings: SettingItem[];
+}
 
 export default function SettingsPage() {
   const [notifications, setNotifications] = useState(true);
@@ -79,7 +96,7 @@ export default function SettingsPage() {
     setIsEditingProfile(false);
   };
 
-  const settingsCategories = [
+  const settingsCategories: SettingsCategory[] = [
     {
       title: "Account & Security",
       icon: Lock,
