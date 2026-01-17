@@ -13,14 +13,14 @@ export function Footer() {
             </div>
             <div className="text-left">
               <p className="font-medium">Developed by Brian Nyarienya</p>
-              <p className="text-sm text-gray-400">Premium Mental Wellness Platform</p>
+              <p className="text-sm text-gray-400">Mental Wellness Platform</p>
             </div>
           </div>
           <p className="text-gray-400">
             All rights reserved • End-to-end encrypted • Zero-trust privacy
           </p>
           <p className="text-sm text-gray-500 mt-2">
-            © 2024 Are You Alive? • Premium Mental Health Technology
+            © 2026 Are You Alive? • Mental Health Technology
           </p>
         </div>
       </div>

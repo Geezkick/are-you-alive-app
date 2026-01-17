@@ -256,14 +256,14 @@ export default function TherapistDashboardPage() {
             <div className="space-y-4">
               <div className="p-3 rounded-xl bg-white/5">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="font-medium">Alex Johnson</span>
+                  <span className="font-medium">Rhoda Wanjiku</span>
                   <span className="text-sm text-pink-500">Tomorrow, 2 PM</span>
                 </div>
                 <div className="text-sm text-gray-400">Video Session • 45 mins</div>
               </div>
               <div className="p-3 rounded-xl bg-white/5">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="font-medium">Casey Brown</span>
+                  <span className="font-medium">Francis Mbugua</span>
                   <span className="text-sm text-gray-400">Friday, 10 AM</span>
                 </div>
                 <div className="text-sm text-gray-400">In-person • 60 mins</div>
