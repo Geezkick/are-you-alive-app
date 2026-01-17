@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "@/components/auth/AuthContext";
 
 export const metadata: Metadata = {
   title: "Are You Alive? | Mental Wellness Companion",
@@ -17,22 +18,24 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-black text-white">
-        <Navigation />
-        <main className="lg:ml-64">
-          {children}
-          <Footer />
-        </main>
-        <Toaster 
-          position="top-right"
-          toastOptions={{
-            style: {
-              background: 'rgba(17, 24, 39, 0.9)',
-              color: '#fff',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-            },
-          }}
-        />
+        <AuthProvider>
+          <Navigation />
+          <main className="lg:ml-64">
+            {children}
+            <Footer />
+          </main>
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: 'rgba(17, 24, 39, 0.9)',
+                color: '#fff',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+              },
+            }}
+          />
+        </AuthProvider>
       </body>
     </html>
   );

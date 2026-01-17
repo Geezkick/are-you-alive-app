@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/components/auth/AuthContext";
 
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
@@ -19,6 +20,7 @@ import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
   const router = useRouter();
+  const { signup } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
@@ -62,13 +64,16 @@ export default function SignUpPage() {
       return;
     }
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Successful registration
-    setIsLoading(false);
-    router.push("/dashboard");
-  };
+    try {
+      await signup(formData.name, formData.email, formData.password);
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Signup failed:", error);
+      alert("Signup failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;

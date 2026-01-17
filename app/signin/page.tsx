@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/components/auth/AuthContext";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -18,6 +19,7 @@ import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
   const router = useRouter();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,13 +30,16 @@ export default function SignInPage() {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Successful login
-    setIsLoading(false);
-    router.push("/dashboard");
-  };
+    try {
+      await login(email, password);
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Login failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   const handleBiometricLogin = () => {
     alert("Biometric login would be implemented with device authentication");
