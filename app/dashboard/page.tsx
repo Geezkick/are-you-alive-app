@@ -15,19 +15,26 @@ import {
   ArrowRight,
   Smile,
   Frown,
-  Meh
+  Meh,
+  Camera
 } from "lucide-react";
 import Link from "next/link";
 
 export default function DashboardPage() {
   const [timeOfDay, setTimeOfDay] = useState("");
-  const [moodData, setMoodData] = useState([7, 8, 6, 9, 8, 7, 8]);
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
   useEffect(() => {
     const hour = new Date().getHours();
     if (hour < 12) setTimeOfDay("Morning");
     else if (hour < 18) setTimeOfDay("Afternoon");
     else setTimeOfDay("Evening");
+    
+    // Load profile picture from localStorage in a real app
+    const savedPicture = localStorage.getItem('profilePicture');
+    if (savedPicture) {
+      setProfilePicture(savedPicture);
+    }
   }, []);
 
   const quickActions = [
@@ -37,14 +44,56 @@ export default function DashboardPage() {
     { icon: Zap, label: "Energy Boost", color: "bg-yellow-500/20", href: "/coping" },
   ];
 
+  const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        setProfilePicture(result);
+        // In a real app, save to backend
+        localStorage.setItem('profilePicture', result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="min-h-screen p-4 md:p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold gradient-text">
-          Good {timeOfDay}, Brian
-        </h1>
-        <p className="text-gray-400">Welcome to your wellness dashboard</p>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold gradient-text">
+              Good {timeOfDay}, Brian
+            </h1>
+            <p className="text-gray-400">Welcome to your wellness dashboard</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="relative group">
+              {profilePicture ? (
+                <img
+                  src={profilePicture}
+                  alt="Profile"
+                  className="h-12 w-12 rounded-full object-cover border-2 border-pink-500/30"
+                />
+              ) : (
+                <div className="h-12 w-12 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center">
+                  <User className="h-6 w-6 text-white" />
+                </div>
+              )}
+              <label className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                <Camera className="h-5 w-5 text-white" />
+                <input
+                  type="file"
+                  onChange={handleProfilePictureChange}
+                  accept="image/*"
+                  className="hidden"
+                />
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Stats Overview */}

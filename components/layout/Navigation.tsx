@@ -13,25 +13,51 @@ import {
   Menu,
   X,
   Bell,
-  User
+  User,
+  Pill,
+  Trophy,
+  BarChart3,
+  FileText,
+  Video,
+  LogIn,
+  UserPlus
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const navItems = [
+const userNavItems = [
   { href: "/dashboard", label: "Dashboard", icon: Home },
   { href: "/checkin", label: "Daily Check-in", icon: Heart },
   { href: "/journal", label: "Journal", icon: BookOpen },
   { href: "/coping", label: "Coping Tools", icon: Brain },
   { href: "/crisis", label: "Crisis Support", icon: Shield },
   { href: "/community", label: "Community", icon: Users },
+  { href: "/journey", label: "Wellness Journey", icon: Trophy },
+  { href: "/medications", label: "Medications", icon: Pill },
+  { href: "/analytics", label: "Analytics", icon: BarChart3 },
+  { href: "/safety-plan", label: "Safety Plan", icon: Shield },
   { href: "/premium", label: "Premium", icon: Sparkles },
   { href: "/settings", label: "Settings", icon: Settings },
+];
+
+const professionalItems = [
+  { href: "/therapist/dashboard", label: "Therapist Portal", icon: Video },
+  { href: "/reports", label: "Reports", icon: FileText },
+];
+
+const authItems = [
+  { href: "/signin", label: "Sign In", icon: LogIn },
+  { href: "/signup", label: "Sign Up", icon: UserPlus },
 ];
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // In real app, check auth state
+
+  // Don't show navigation on auth pages
+  const isAuthPage = pathname?.includes('/signin') || pathname?.includes('/signup');
+  if (isAuthPage) return null;
 
   return (
     <>
@@ -60,23 +86,75 @@ export function Navigation() {
               <span className="text-xl font-bold gradient-text">Are You Alive?</span>
             </div>
             
-            <nav className="space-y-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
-                    pathname === item.href
-                      ? "bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30"
-                      : "hover:bg-white/10"
-                  }`}
-                >
-                  <item.icon className="h-5 w-5" />
-                  <span>{item.label}</span>
-                </Link>
-              ))}
-            </nav>
+            {isLoggedIn ? (
+              <>
+                {/* User Navigation */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-semibold text-gray-400 mb-3">MAIN NAVIGATION</h3>
+                  <nav className="space-y-2">
+                    {userNavItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+                          pathname === item.href
+                            ? "bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30"
+                            : "hover:bg-white/10"
+                        }`}
+                      >
+                        <item.icon className="h-5 w-5" />
+                        <span>{item.label}</span>
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
+
+                {/* Professional Navigation */}
+                <div className="mb-8">
+                  <h3 className="text-sm font-semibold text-gray-400 mb-3">PROFESSIONAL</h3>
+                  <nav className="space-y-2">
+                    {professionalItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+                          pathname === item.href
+                            ? "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30"
+                            : "hover:bg-white/10"
+                        }`}
+                      >
+                        <item.icon className="h-5 w-5" />
+                        <span>{item.label}</span>
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
+              </>
+            ) : (
+              /* Auth Navigation */
+              <div className="mb-8">
+                <h3 className="text-sm font-semibold text-gray-400 mb-3">GET STARTED</h3>
+                <nav className="space-y-2">
+                  {authItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+                        pathname === item.href
+                          ? "bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30"
+                          : "hover:bg-white/10"
+                      }`}
+                    >
+                      <item.icon className="h-5 w-5" />
+                      <span>{item.label}</span>
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -90,38 +168,88 @@ export function Navigation() {
           <span className="text-xl font-bold gradient-text">Are You Alive?</span>
         </div>
         
-        <nav className="space-y-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
-                pathname === item.href
-                  ? "bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30"
-                  : "hover:bg-white/10"
-              }`}
-            >
-              <item.icon className="h-5 w-5" />
-              <span>{item.label}</span>
-            </Link>
-          ))}
-        </nav>
+        {isLoggedIn ? (
+          <>
+            {/* User Navigation */}
+            <div className="mb-6">
+              <h3 className="text-sm font-semibold text-gray-400 mb-3">MAIN NAVIGATION</h3>
+              <nav className="space-y-2">
+                {userNavItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+                      pathname === item.href
+                        ? "bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30"
+                        : "hover:bg-white/10"
+                    }`}
+                  >
+                    <item.icon className="h-5 w-5" />
+                    <span>{item.label}</span>
+                  </Link>
+                ))}
+              </nav>
+            </div>
 
-        {/* User Profile */}
-        <div className="absolute bottom-6 left-6 right-6">
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center">
-              <User className="h-5 w-5 text-white" />
+            {/* Professional Navigation */}
+            <div className="mb-8">
+              <h3 className="text-sm font-semibold text-gray-400 mb-3">PROFESSIONAL</h3>
+              <nav className="space-y-2">
+                {professionalItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+                      pathname === item.href
+                        ? "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30"
+                        : "hover:bg-white/10"
+                    }`}
+                  >
+                    <item.icon className="h-5 w-5" />
+                    <span>{item.label}</span>
+                  </Link>
+                ))}
+              </nav>
             </div>
-            <div className="flex-1">
-              <p className="font-medium">Brian Nyarienya</p>
-              <p className="text-xs text-gray-400">Premium User</p>
+
+            {/* User Profile */}
+            <div className="absolute bottom-6 left-6 right-6">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5">
+                <div className="h-10 w-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center">
+                  <User className="h-5 w-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-medium">Brian Nyarienya</p>
+                  <p className="text-xs text-gray-400">Premium User</p>
+                </div>
+                <button className="p-2 hover:bg-white/10 rounded-lg">
+                  <Bell className="h-4 w-4" />
+                </button>
+              </div>
             </div>
-            <button className="p-2 hover:bg-white/10 rounded-lg">
-              <Bell className="h-4 w-4" />
-            </button>
+          </>
+        ) : (
+          /* Auth Navigation */
+          <div className="mb-8">
+            <h3 className="text-sm font-semibold text-gray-400 mb-3">GET STARTED</h3>
+            <nav className="space-y-2">
+              {authItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+                    pathname === item.href
+                      ? "bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30"
+                      : "hover:bg-white/10"
+                  }`}
+                >
+                  <item.icon className="h-5 w-5" />
+                  <span>{item.label}</span>
+                </Link>
+              ))}
+            </nav>
           </div>
-        </div>
+        )}
       </aside>
     </>
   );

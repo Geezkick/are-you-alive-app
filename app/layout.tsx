@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
+import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
         <Navigation />
         <main className="lg:ml-64">
           {children}
+          <Footer />
         </main>
         <Toaster 
           position="top-right"

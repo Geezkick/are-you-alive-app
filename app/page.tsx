@@ -19,27 +19,67 @@ export default function Home() {
     return (
       <div className="min-h-screen flex items-center justify-center gradient-bg">
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <Heart className="h-16 w-16 text-pink-500 mx-auto" />
-          <h1 className="text-4xl font-bold mt-4 gradient-text">Are You Alive?</h1>
-          <p className="text-gray-400 mt-2">Premium Mental Wellness Platform</p>
-          <div className="mt-6 flex justify-center space-x-2">
+          {/* Heart pulse animation */}
+          <div className="relative mb-8">
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute inset-0 rounded-full bg-pink-500/20"
+            />
+            <Heart className="h-20 w-20 text-pink-500 mx-auto relative z-10" />
+          </div>
+          
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-5xl font-bold gradient-text mb-4"
+          >
+            Are You Alive?
+          </motion.h1>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-gray-400 text-lg mb-8"
+          >
+            Mental Wellness Platform
+          </motion.p>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="text-sm text-gray-500"
+          >
+            by Brian Nyarienya
+          </motion.p>
+
+          {/* Loading dots */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="flex justify-center space-x-2 mt-8"
+          >
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
                 className="h-2 w-2 rounded-full bg-pink-500"
                 animate={{
-                  y: ["0%", "-50%", "0%"],
+                  scale: [1, 1.5, 1],
                 }}
                 transition={{
                   duration: 0.6,
@@ -48,7 +88,7 @@ export default function Home() {
                 }}
               />
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     );
@@ -63,7 +103,7 @@ export default function Home() {
           className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8"
         >
           <Sparkles className="h-4 w-4 text-yellow-400" />
-          <span className="text-sm font-medium">PREMIUM MENTAL WELLNESS</span>
+          <span className="text-sm font-medium"> MENTAL WELLNESS</span>
         </motion.div>
 
         <motion.h1
@@ -74,7 +114,7 @@ export default function Home() {
         >
           <span className="gradient-text block">Are You Alive?</span>
           <span className="text-xl md:text-2xl lg:text-3xl text-gray-300 block mt-4">
-            Your premium mental wellness companion
+            Your mental wellness companion
           </span>
         </motion.h1>
 
@@ -95,18 +135,17 @@ export default function Home() {
           className="flex flex-col sm:flex-row gap-4 mb-12"
         >
           <Link 
-            href="/dashboard"
+            href="/signin"
             className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 text-lg"
           >
-            Start Your Journey
+            Sign In to Continue
             <ArrowRight className="h-5 w-5" />
           </Link>
           <Link
-            href="/premium"
+            href="/signup"
             className="border-2 border-pink-500/30 text-pink-500 px-8 py-4 rounded-xl font-semibold hover:bg-pink-500/10 hover:border-pink-500/50 transition-all flex items-center justify-center gap-2 text-lg"
           >
-            <Sparkles className="h-5 w-5" />
-            Explore Premium
+            Create New Account
           </Link>
         </motion.div>
 
@@ -171,7 +210,7 @@ export default function Home() {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { value: "10K+", label: "Active Users" },
+              { value: "5+", label: "Active Users" },
               { value: "99.9%", label: "Uptime" },
               { value: "256-bit", label: "Encryption" },
               { value: "24/7", label: "Support" },
