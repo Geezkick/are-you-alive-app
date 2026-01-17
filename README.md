@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Are You Alive? - Premium Mental Wellness Platform
+
+A comprehensive mental health tracking and crisis support platform developed by Brian Nyarienya.
+
+## Features
+
+### �� Mental Health Core Features
+- Daily emotional check-ins with mood sliders
+- Mood tracking & insights with pattern recognition
+- Private encrypted journaling with AI prompts
+- Coping tools & guided meditation
+
+### 🛡️ Safety & Crisis Protection
+- One-tap SOS emergency button
+- Smart safety alerts
+- Consent-based location sharing
+- Crisis support access
+
+### 🔒 Security & Privacy
+- End-to-end encryption
+- Biometric & PIN protection
+- Zero-trust privacy model
+- No data selling policy
+
+### 🤖 AI & Intelligence
+- Risk detection engine
+- AI emotional support
+- Behavioral insights
+- Pattern analysis
+
+## Tech Stack
+
+- **Framework:** Next.js 14 with App Router
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animation:** Framer Motion
+- **State Management:** Zustand
+- **Database:** PostgreSQL with Prisma
+- **UI Components:** Radix UI
+- **Authentication:** Custom with JWT
+- **Deployment:** Vercel
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository:
 ```bash
+git clone <repository-url>
+cd are-you-alive
+Install dependencies:
+
+bash
+
+Copy
+
+Download
+npm install
+Set up environment variables:
+
+bash
+
+Copy
+
+Download
+cp .env.local.example .env.local
+Set up the database:
+
+bash
+
+Copy
+
+Download
+npx prisma generate
+npx prisma db push
+Run the development server:
+
+bash
+
+Copy
+
+Download
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000 in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Development
+npm run dev - Start development server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+npm run build - Build for production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+npm start - Start production server
 
-## Learn More
+npm run lint - Run ESLint
 
-To learn more about Next.js, take a look at the following resources:
+npx prisma studio - Open Prisma database GUI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Deployment
+The project is configured for deployment on Vercel:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Push your code to GitHub
 
-## Deploy on Vercel
+Import project in Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Add environment variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy!
+
+License
+Proprietary - Developed by Brian Nyarienya
+
+Contact
+For inquiries about the platform, contact Brian Nyarienya.
